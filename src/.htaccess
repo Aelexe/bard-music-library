@@ -1,0 +1,31 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+
+Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
+
+RewriteCond %{HTTPS} !on 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$ 
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$ 
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{ENV:REDIRECT_STATUS} 200 [OR]
+RewriteCond %{REQUEST_URI} ^/robots.txt [OR]
+RewriteCond %{REQUEST_URI} ^/sitemap.xml
+RewriteRule .* - [L]
+
+RewriteRule ^vid\/.*$ $0 [L]
+RewriteRule ^(css|font|img|js)\/(.*)$ /resource.php?file=$1/$2 [L]
+
+RewriteRule ^$ /views/home.php [L]
+RewriteRule ^music$ /views/music-list.php [L]
+RewriteRule ^user/(.*)/music/(.*)$ /views/music.php?user=$1&music=$2 [L]
+RewriteRule ^upload$ /views/upload.php [L]
+RewriteRule ^user/(.*)/activate/(.*)$ /views/user-activation.php?user=$1&key=$2 [L]
+RewriteRule ^login$ /views/login.php [L]
+RewriteRule ^logout$ /views/logout.php [L]
+RewriteRule ^register$ /views/register.php [L]
+
+RewriteRule ^api/music$ /api/music.php [L]
+RewriteRule ^api/user/(.*)/music/(.*)$ /api/music.php?user=$1&music=$2 [L]
+
+ErrorDocument 404 /views/404.php

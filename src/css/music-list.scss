@@ -1,0 +1,267 @@
+@import "_base.scss";
+@import "header.scss";
+
+.search {
+	display: flex;
+	width: 100%;
+	flex-grow: 1;
+
+	.search-filters {
+		flex: 0 0 320px;
+		color: $color-off-white;
+		background: $color-bg-dark;
+
+		h2 {
+			padding: 16px 24px 0 24px;
+			margin-top: 12px;
+			@include font-size(24px, 600);
+		}
+
+		.filter-groups {
+			padding: 16px 24px;
+
+			.filter-group {
+				padding: 10px 0;
+
+				h4 {
+					@include font-size(20px, 500);
+				}
+
+				.filters {
+					display: grid;
+					margin-top: 4px;
+					gap: 6px;
+
+					.filter {
+						display: flex;
+						align-items: center;
+						gap: 10px;
+						@include font-size(14px, 400);
+
+						cursor: pointer;
+					}
+				}
+
+				&.ensembles,
+				&.instruments {
+					> .filters {
+						display: grid;
+						grid-template-columns: repeat(2, 1fr);
+					}
+				}
+
+				&.instruments {
+					> .filters {
+						gap: 10px;
+					}
+				}
+			}
+		}
+	}
+
+	.search-results {
+		flex-grow: 1;
+		padding: 36px 40px;
+
+		h2 {
+			@include font-size(30px, 600);
+			margin-bottom: 16px;
+		}
+
+		.results {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 10px;
+
+			.result {
+				display: flex;
+				gap: 20px;
+				padding-bottom: 30px;
+				border-bottom: 1px solid #44475a;
+				margin-bottom: 30px;
+
+				.image {
+					width: 200px;
+					height: 200px;
+					flex-shrink: 0;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+				}
+
+				.title {
+					font-size: 24px;
+					font-weight: 400;
+
+					cursor: pointer;
+					transition: all 0.3s;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+
+				.below-title {
+					display: inline-flex;
+					gap: 20px;
+					justify-content: space-between;
+					margin: 8px 0;
+				}
+
+				.text {
+					font-size: 14px;
+					.author {
+						a {
+							color: $color-blue;
+
+							cursor: pointer;
+							transition: all 0.3s;
+
+							&:hover {
+								color: $color-light-blue;
+							}
+						}
+					}
+					.stats {
+						display: flex;
+						gap: 10px;
+
+						i {
+							margin-right: 4px;
+						}
+					}
+
+					.description {
+						margin-bottom: 8px;
+					}
+
+					.ensembles {
+						.ensemble {
+							&:not(:last-child)::after {
+								content: ", ";
+								margin-right: 2px;
+								cursor: default;
+							}
+						}
+					}
+
+					.instruments {
+						.instrument {
+							&:not(:last-child)::after {
+								content: ", ";
+								margin-right: 2px;
+								cursor: default;
+							}
+						}
+					}
+
+					.tags {
+						display: flex;
+
+						.tag {
+							color: $color-blue;
+
+							cursor: pointer;
+							transition: all 0.3s;
+
+							&:hover {
+								color: $color-light-blue;
+							}
+
+							&:not(:last-child)::after {
+								content: ", ";
+								margin-right: 4px;
+								cursor: default;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.checkbox {
+	display: flex;
+	position: relative;
+
+	--background: #{$color-bg-dark};
+	--background-checked: #{$color-bg-lightest};
+	--border: #{$color-bg-lightest};
+	--border-hover: #{$color-bg-lightest};
+	--border-active: #{$color-bg-lightest};
+	--tick: #fff;
+
+	input,
+	svg {
+		width: 18px;
+		height: 18px;
+		display: block;
+	}
+
+	input {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		position: relative;
+		outline: none;
+		background: var(--background);
+		border: 1px solid var(--border);
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		border-radius: 4px;
+		transition: all 0.3s;
+
+		&:hover {
+			--s: 2px;
+			--b: var(--border-hover);
+		}
+		&:checked {
+			--b: var(--border-active);
+		}
+	}
+	svg {
+		pointer-events: none;
+		fill: none;
+		stroke-width: 2px;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke: var(--stroke, var(--border-active));
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 18px;
+		height: 18px;
+		transform: scale(var(--scale, 1)) translateZ(0);
+	}
+	&.bounce {
+		--stroke: var(--tick);
+		input {
+			&:checked {
+				background: var(--background-checked);
+				--s: 11px;
+				& + svg {
+					animation: bounce 0.4s linear forwards 0.2s;
+				}
+			}
+		}
+		svg {
+			--scale: 0;
+		}
+	}
+
+	@keyframes bounce {
+		50% {
+			transform: scale(1.2);
+		}
+		75% {
+			transform: scale(0.9);
+		}
+		100% {
+			transform: scale(1);
+		}
+	}
+}

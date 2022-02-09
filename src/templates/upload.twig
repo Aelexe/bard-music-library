@@ -1,0 +1,12 @@
+{% extends "base.twig" %}
+
+{% set aboveFoldScripts = ["/pages/upload.js"] %}
+{% set aboveFoldStyles = ["/css/upload.css"] %}
+
+{% block body %}
+	<script>
+		const username = "{{ username }}";
+const ensembles = {{ ensembles | raw }};
+const instruments = {{ instruments | raw }};
+	</script>
+{% endblock %}

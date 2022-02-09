@@ -1,0 +1,13 @@
+{% extends "base.twig" %}
+
+{% set aboveFoldScripts = ["/pages/music.js","https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"] %}
+{% set aboveFoldStyles = ["/css/music.css"] %}
+
+{% block body %}
+	<midi-player id="midi-player" sound-font visualizer="midi-visualizer"></midi-player>
+	<midi-visualizer id="midi-visualizer"></midi-visualizer>
+	<script>
+		const username = "{{ username }}";
+const music = {{ music | raw }};
+	</script>
+{% endblock %}

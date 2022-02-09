@@ -1,0 +1,10 @@
+{% extends "base.twig" %}
+
+{% set aboveFoldScripts = ["/pages/home.js"] %}
+{% set aboveFoldStyles = ["/css/home.css"] %}
+
+{% block body %}
+	<script>
+		const username = "{{ username }}";
+	</script>
+{% endblock %}

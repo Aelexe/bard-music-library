@@ -1,0 +1,95 @@
+@import "_base.scss";
+
+header {
+	display: flex;
+	height: 63px;
+	padding: 10px 24px;
+	justify-content: space-between;
+	background-color: $color-bg-darkest;
+	color: #fff;
+
+	.left {
+		display: flex;
+		height: 100%;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.right {
+		display: flex;
+		height: 100%;
+		align-items: center;
+		gap: 30px;
+	}
+
+	.brand {
+		height: 100%;
+
+		a {
+			display: flex;
+			flex-basis: 320px;
+			height: 100%;
+			align-items: center;
+
+			img {
+				height: 100%;
+			}
+			h1 {
+				margin-left: 10px;
+				@include font-size(26px, 400);
+				color: $color-off-white;
+			}
+		}
+	}
+
+	.search-bar {
+		width: 500px;
+		height: 40px;
+		font-size: 14px;
+		padding: 0 10px;
+		margin: 0 20px;
+		border-radius: 6px;
+		color: #364152;
+	}
+
+	.upload {
+		i {
+			margin: 0 8px;
+		}
+	}
+
+	.user {
+		position: relative;
+
+		cursor: pointer;
+
+		.options {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			border: 1px solid $color-divider;
+			background-color: $color-bg-light;
+
+			h2 {
+				padding: 8px 20px;
+				background-color: $color-bg-dark;
+			}
+
+			li {
+				display: flex;
+				align-items: center;
+				padding: 8px 20px;
+
+				cursor: pointer;
+
+				i {
+					margin-right: 6px;
+				}
+			}
+		}
+	}
+
+	.login-button {
+		cursor: pointer;
+	}
+}

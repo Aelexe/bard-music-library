@@ -1,0 +1,13 @@
+## Project
+# Build
+dist/
+
+# Deployment Configuration
+config.php
+
+## Language
+# Javascript/Node
+node_modules/
+
+# PHP
+vendor/

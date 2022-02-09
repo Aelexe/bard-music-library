@@ -1,0 +1,287 @@
+// Media Queries
+$min-query: "(min-width: 0px)";
+$phone-query: "(min-width: 576px)";
+$tablet-query: "(min-width: 768px)";
+$desktop-small-query: "(min-width: 992px)";
+$desktop-query: "(min-width: 1200px)";
+$max-query: "(min-width: 1350px)";
+
+// Fonts
+$font-family-header: "Roboto Condensed", sans-serif;
+$font-family-body: "Roboto Condensed", sans-serif;
+
+// Colors
+$color-bg-darkest: rgb(25, 26, 33);
+$color-bg-dark: rgb(33, 34, 44);
+$color-bg-light: rgb(40, 42, 54);
+$color-bg-lighter: rgb(52, 55, 70);
+$color-bg-lightest: rgb(68, 71, 90);
+$color-divider: rgb(68, 71, 90);
+$color-off-white: rgb(235, 235, 230);
+$color-brown: #553131;
+$color-yellow: #a5783a;
+$color-dark-blue: #376996;
+$color-blue: #6290c8;
+$color-light-blue: rgb(133, 227, 247);
+$color-green: rgb(78, 250, 121);
+
+// Stock Overrides
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	min-height: 100vh;
+	font-family: $font-family-body;
+	overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font-family-header;
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+form {
+	font-family: $font-family-body;
+	color: inherit;
+}
+
+input,
+textarea {
+	border: 0;
+	color: inherit;
+	font-family: $font-family-body;
+	outline: none;
+}
+
+textarea {
+	resize: none;
+}
+
+button {
+	border: 0;
+	background: inherit;
+	outline: none;
+	text-align: center;
+	font-family: $font-family-body;
+
+	cursor: pointer;
+}
+
+// Mixins
+@mixin font-size($font-size, $font-weight: false, $letter-spacing: false, $line-height: false) {
+	font-size: $font-size;
+
+	@if $font-weight {
+		font-weight: $font-weight;
+	}
+	@if $letter-spacing {
+		letter-spacing: $letter-spacing;
+	}
+	@if $line-height {
+		line-height: $line-height;
+	}
+}
+
+@mixin hover-underline($width, $height, $offset, $color) {
+	&::after {
+		position: absolute;
+		bottom: $offset;
+		left: calc((100% - #{$width}) / 2);
+		content: "";
+		width: $width;
+		height: $height;
+		background-color: $color;
+		opacity: 0;
+
+		transition: opacity 0.3s;
+	}
+
+	&:hover {
+		&::after {
+			opacity: 1;
+		}
+	}
+}
+
+@mixin media($property, $min, $phone: false, $tablet: false, $desktop-small: false, $desktop: false, $max: false) {
+	@if $min {
+		@media #{$min-query} {
+			#{$property}: $min;
+		}
+	}
+	@if $phone {
+		@media #{$phone-query} {
+			#{$property}: $phone;
+		}
+	}
+	@if $tablet {
+		@media #{$tablet-query} {
+			#{$property}: $tablet;
+		}
+	}
+	@if $desktop-small {
+		@media #{$desktop-small-query} {
+			#{$property}: $desktop-small;
+		}
+	}
+	@if $desktop {
+		@media #{$desktop-query} {
+			#{$property}: $desktop;
+		}
+	}
+	@if $max {
+		@media #{$max-query} {
+			#{$property}: $max;
+		}
+	}
+}
+
+@mixin button($font-color, $bg-color, $hover-font-color) {
+	position: relative;
+	color: $font-color;
+	border: 1px solid $bg-color;
+
+	cursor: pointer;
+	transition: all 0.3s;
+
+	&:hover:not(.disable-interact) {
+		color: $hover-font-color;
+	}
+
+	&.disable-interact {
+		cursor: default;
+	}
+
+	&.hide-text {
+		color: transparent !important;
+	}
+}
+
+@mixin button-solid-empty($font-color, $bg-color, $hover-font-color) {
+	@include button($font-color, $bg-color, $hover-font-color);
+	background-color: $bg-color;
+	border: 1px solid $bg-color;
+
+	&:hover:not(.disable-interact) {
+		background-color: transparent;
+	}
+}
+
+@mixin button-empty($font-color, $bg-color, $hover-font-color) {
+	@include button($font-color, $bg-color, $hover-font-color);
+	background-color: transparent;
+	border: 1px solid $bg-color;
+
+	&:hover:not(.disable-interact) {
+		background-color: $bg-color;
+	}
+}
+
+@mixin hidden($x: 0, $y: 0) {
+	transition: opacity 0.5s, transform 0.5s ease-out;
+
+	&.hidden {
+		transform: translate($x, $y);
+		opacity: 0;
+	}
+}
+
+// CSS
+body {
+	background-color: $color-bg-light;
+}
+
+.app {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	background-color: $color-bg-light;
+	color: $color-off-white;
+}
+
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgb(72, 73, 80);
+	border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+.spinner {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	width: 30px;
+	height: 30px;
+	margin: 0 auto;
+	transform: translate(-50%, -50%);
+
+	div {
+		box-sizing: border-box;
+		display: block;
+		position: absolute;
+		width: 80%;
+		height: 80%;
+		margin: 2px;
+		border: 4px solid #fff;
+		border-radius: 50%;
+		animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+		border-color: #fff transparent transparent transparent;
+
+		&:nth-child(1) {
+			animation-delay: -0.45s;
+		}
+
+		&:nth-child(2) {
+			animation-delay: -0.3s;
+		}
+
+		&:nth-child(3) {
+			animation-delay: -0.15s;
+		}
+	}
+
+	@keyframes lds-ring {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}

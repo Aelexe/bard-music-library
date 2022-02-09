@@ -1,0 +1,31 @@
+@import "_base.scss";
+@import "header.scss";
+
+.home {
+	max-width: 960px;
+	margin: 0 auto;
+
+	section {
+		padding: 4vw 0;
+
+		+ section {
+			border-top: 1px solid $color-divider;
+		}
+
+		h1 {
+			@include media(font-size, 32px, $tablet: 48px);
+			text-transform: uppercase;
+			text-align: center;
+		}
+
+		.text-block {
+			max-width: 768px;
+			margin: 30px auto;
+		}
+
+		p {
+			margin: 10px 0;
+			font-size: 16px;
+		}
+	}
+}
